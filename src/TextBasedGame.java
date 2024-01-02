@@ -7,20 +7,22 @@ public class TextBasedGame {
         int age = Integer.parseInt(scanner.nextLine());
         if (age*3>=300) {
             System.out.println(woo(age));
+            return;
         }
-        if (age>5) {
+        else if (age>5) {
             System.out.println("Great let's continue!");
         }
-        if (age<=5) {
+        else if (age<=5) {
             System.out.println("I know you're not " +age+ "-years old. Enter your real age please");
             int another = Integer.parseInt(scanner.nextLine());
             if (another*3>=300) {
                 System.out.println(woo(age));
+                return;
             }
-            if (another>5) {
+            else if (another>5) {
                 System.out.println("Great let's continue!");
             }
-            if (another<=5) {
+            else if (another<=5) {
                 System.out.println("Ok. You did it again. Goodbye.");
                 return;
             }
@@ -34,20 +36,20 @@ public class TextBasedGame {
     public static void perform() {
         Scanner scanner = new Scanner(System.in);
         String yesNo = scanner.nextLine();
-        if (yesNo.equals("yes")) {
+        if (yesNo.contains("yes")) {
             System.out.println("You pick it up, and there's a voice on the other end telling you to meet in front of your house at 7:00 pm. You check your watch, that's in 5 minutes. Do you go?");
             String go = scanner.nextLine();
-            if (go.equals("no")) {
+            if (go.contains("no")) {
                 System.out.println("You reject the offer and hang up the phone. But all of a sudden, you hear banging outside of your window and you take a look.");
                 System.out.println("It's a guy in a black hoodie gesturing for you to come down. You hesitantly get up from your bed and go to the front door.");
                 encounter();
             }
-            if (go.equals("yes")) {
+            if (go.contains("yes")) {
                 System.out.println("You walk down the stairs to your front door and open the door and see a guy in a black hoodie.");
                 encounter();
             }
         }
-        if (yesNo.equals("no")) {
+        else if (yesNo.contains("no")) {
             notPerform();
         }
     }
@@ -65,11 +67,12 @@ public class TextBasedGame {
             String greeting = scanner.nextLine();
         if (greeting.contains("yell") || greeting.contains("leave")) {
             System.out.println("'I don't know you, get away!' You yell at him. Before you slam the door on him.");
+            proceed();
         }
         if (greeting.contains("polite") || greeting.contains("hi")) {
             System.out.println("'Hello. Who are you?' You politely say. 'That's not important.'");
+            proceed();
     }
-        proceed();
     }
 
     public static void proceed() {
@@ -81,19 +84,20 @@ public class TextBasedGame {
         System.out.println("You reject the offer and return to your mundane, boring life; missing out on the chance to find the treasure.");
         return;
     }
-        if (follow==2){
-        System.out.println("Your curiosity gets the better of you and you agree. He tells you to follow him and leads you to this grand temple.");
-        System.out.println("Right when you guys enter the door, you hear footsteps coming. 'Quick! Hide!' He whisper-yells. Do you hide behind a huge pillar or behind a big statue?");
-        scanner.nextLine();
-        String hide = scanner.nextLine();
-        if (hide.contains("pillar")) {
-            System.out.println("The people walk past you and you hold your breath. Thankfully they don't notice you.");
+        if (follow==2) {
+            System.out.println("Your curiosity gets the better of you and you agree. He tells you to follow him and leads you to this grand temple.");
+            System.out.println("Right when you guys enter the door, you hear footsteps coming. 'Quick! Hide!' He whisper-yells. Do you hide behind a huge pillar or behind a big statue?");
+            scanner.nextLine();
+            String hide = scanner.nextLine();
+            if (hide.contains("pillar")) {
+                System.out.println("The people walk past you and you hold your breath. Thankfully they don't notice you.");
+                first();
+            }
+            else if (hide.contains("statue")) {
+                System.out.println("You lean against the statue and hold your breath, but your phone starts ringing in your pocket. You thought for sure you will get busted. Thankfully the people walking past are deaf and cannot hear your phone at all.");
+                first();
+            }
         }
-        if (hide.contains("statue")) {
-            System.out.println("You lean against the statue and hold your breath, but your phone starts ringing in your pocket. You thought for sure you will get busted. Thankfully the people walking past are deaf and cannot hear your phone at all.");
-        }
-    }
-        first();
     }
 
     public static void first() {
@@ -147,6 +151,7 @@ public static void guards() {
     }
     else {
         System.out.println("Unfortunately you entered the wrong word. Better luck next time.");
+        return;
     }
 }
 public static void treasure() {
@@ -156,10 +161,19 @@ public static void treasure() {
     System.out.println("Daffodil (Press 1), Lily (Press 2), Tulip (Press 3), Orchid (Press 4)");
     Scanner scanner = new Scanner(System.in);
     int flower = scanner.nextInt();
-    if (flower == 1 || flower == 2 || flower == 3) {
-        System.out.println("You raise your hand to touch the" +flower+"and it kills you immediately. As it turns out, the flower"+flower+"is poisonous. Better luck next time.");
+    if (flower == 1) {
+        System.out.println("You raise your hand to touch the Daffodil and it kills you immediately. As it turns out, the flower Daffodil is poisonous. Better luck next time.");
+        return;
     }
-    if (flower == 4) {
+    else if (flower == 2) {
+        System.out.println("You raise your hand to touch the Lily and it kills you immediately. As it turns out, the flower Lily is poisonous. Better luck next time.");
+        return;
+    }
+    else if (flower == 3) {
+        System.out.println("You raise your hand to touch the Tulip and it kills you immediately. As it turns out, the flower Tulip is poisonous. Better luck next time.");
+        return;
+    }
+    else if (flower == 4) {
         System.out.println("You raise your hand to touch the Orchid as you hold your breath and to your relief, the flower hums out a soothing tune and the door in front of you clicks open.");
         System.out.println("You and your partner reach for the treasure and open the box. The jewelry is luminous and shines so bright that it almost makes you go blind.");
         System.out.println("You smile, already thinking of all the things you can do with this money.");
@@ -184,13 +198,16 @@ public static void treasure() {
                             System.out.println("After what feels like an eternity, you and your partner notice the perfect chance to sneak out. You creep past the guards and into a back exit.");
                             System.out.println("With a sigh of relief, you step outside the museum, the stolen treasure safely in your possession.");
                             System.out.println("Now you are 50 million dollars richer! You and your partner share a satisfied smile.");
+                            System.exit(0);
                         }
-                        if (ventilation==2) {
+                        else if (ventilation==2) {
                             System.out.println(goodOrBad());
+                            System.exit(0);
                         }
                     }
-                    if (decision.contains("cr")) {
+                    else if (decision.contains("cr")) {
                         System.out.println(goodOrBad());
+                        System.exit(0);
                     }
                 }
                     if (quick.contains("tw")) {
@@ -207,8 +224,8 @@ public static void treasure() {
                             int ultimate = scanner.nextInt();
                             if (ultimate ==1) {
                                 System.out.println("You land in the pool of water without any harm, but little did you know you landed in one of the world's deadliest shark-infested oceans.");
-                                System.out.println("You and your partner in crime, along with the precious treasure gets torn away by sharks. Better luck next time.");
-                                return;
+                                System.out.println("You and your partner in crime, along with the precious treasure gets torn away by sharks. Better luck next time. Or I guess... there's no next time.");
+                                System.exit(0);
                             }
                             if (ultimate==2) {
                                 System.out.println("You and your partner take a leap of faith into the huge hole that never seems to end. You brace yourself for impact against the hard ground....");
@@ -216,8 +233,6 @@ public static void treasure() {
                                 System.out.println("You escape the net, into the streets and leave with your treasures.");
                                 System.out.println("You split the treasure with your partner and it turns out you are now 50 million dollars richer! Now you can spend your money on anything you could ever dream of!");
                                 System.out.println("Congratulations! Goodbye!");
-
-                                System.out.println("********* END **********");
                                 System.exit(0);
                             }
                         }
